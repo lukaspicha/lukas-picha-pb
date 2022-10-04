@@ -9,7 +9,7 @@ class Person {
     protected $sex;
     protected $birthday;
 
-    public function __construct(int $id, string $firstname, string $lastName, string $sex, \DateTime $birthday) {
+    public function __construct(string $id, string $firstname, string $lastName, string $sex, \DateTime $birthday) {
         $this
             ->setId($id)
             ->setFirstname($firstname)
@@ -23,7 +23,7 @@ class Person {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId(string $id) {
         $this->id = $id;
         return $this;
     }
@@ -79,6 +79,8 @@ class Person {
     }
 
     public function __toString() {
-        return $this->getName() . " | " .  $this->getSex() . " | " . $this->getBirthday()->format("d. m. Y");
+        return $this->getId() . " | " . $this->getName() . " | " .  $this->getSex() . " | " . $this->getBirthday()->format("d. m. Y");
     }
 }
+
+class Model_Person_Exception extends \Exception {}

@@ -34,10 +34,12 @@ class ParseTxt {
         for ($i = 0; $i < count($lines); $i += 3) {     
 
             $fullname_array = explode(" ", $lines[$i]);
+
+            $id = crc32($lines[$i]);
             $another_data_array = explode(" ", $lines[$i + 1]);
 
             $this->data[] = [
-                'id'        => uniqid(),
+                'id'        => $id,
                 'firstname' => $fullname_array[0],
                 'lastname'  => $fullname_array[1],
                 'sex'       => $another_data_array[0] == "muž" ? "m" : "f",
@@ -49,4 +51,4 @@ class ParseTxt {
    
 }
 
-class ParseTxt_ImportException {}
+class ParseTxt_ImportException extends \Exception {}

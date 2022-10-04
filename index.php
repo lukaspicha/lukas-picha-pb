@@ -20,8 +20,30 @@ try {
     $robotLoader->setAutoRefresh(true);
     $robotLoader->register();
 
-    $person = new Models\Person(1, "L", "P", "m", new DateTime("1990-01-01"));
-    echo $person->getLengthOfLife(new DateTime());
+    $parseTxt = new Helpers\ParseTxt();
+    $parseTxt->importFile(DOCROOT . DS . "data.txt");
+    $data = $parseTxt->getData();
+
+    $startDate =  new DateTime();
+    $group = Models\Group::getInstance($data);
+
+    $stats = new Helpers\Stats($group);
+    $sex = "F";
+    $relativeFreqPercent = $stats->getRelativeFrequency('sex', $sex) * 100;
+
+
+    echo "Lide s txt + délka jejich života:<br>";
+    foreach ($group as $key => $person) {
+        echo $person . ", délka života v dnech: " . $person->getLengthOfLife($startDate) ."<br>";
+    }
+
+    echo "<br>";
+
+    echo "Nalezec dle id: " . $group->findById("1900307216");
+
+    echo "<br>";
+    echo "Procentuální zastoupení pohlaví {sex}: {$relativeFreqPercent} %";
+
 
 }catch (Exception $e){
     var_dump('ERROR');

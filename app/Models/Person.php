@@ -68,6 +68,10 @@ class Person {
         return $this->getFirstname() . " " . $this->getSurname();
     }
 
+    public function getIteratorKey() {
+        return $this->getId();
+    }
+
     // datum od kdy chceme zjisti délku života a druhý praram je v jakých jednotkách, default jsou dny
     public function getLengthOfLife(\DateTime $from, string $units = '%a') {
         $interval = $from->diff($this->getBirthDay());
@@ -75,6 +79,6 @@ class Person {
     }
 
     public function __toString() {
-        return $this->getName() . " | " .  $this->getSex() . " | " . $this->getBirthday();
+        return $this->getName() . " | " .  $this->getSex() . " | " . $this->getBirthday()->format("d. m. Y");
     }
 }

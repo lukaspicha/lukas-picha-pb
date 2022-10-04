@@ -8,7 +8,7 @@ class Group implements \Iterator {
 
     private static $instance = false;
 
-    public static function getInstance($data) {
+    public static function getInstance($data = []) {
         if(self::$instance === false){ 
             self::$instance = new Group($data); 
         } 
@@ -41,8 +41,16 @@ class Group implements \Iterator {
        return isset($this->data[$this->position]);
     }
 
-    public function count() : int
-    {        
+    public function count() : int {        
         return count($this->data);
+    }
+
+    public function findById(string $id) {
+        foreach ($this as $key => $person) {
+            if($key == $id) {
+                return $person;
+            }
+        }
+        throw new Model_Person_Exception("Invalid id {$id} for person");
     }
 }

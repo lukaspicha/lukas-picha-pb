@@ -42,7 +42,7 @@ try {
     echo "Nalezec dle id: " . $group->findById("1900307216");
 
     echo "<br>";
-    echo "Procentuální zastoupení pohlaví {sex}: {$relativeFreqPercent} %";
+    echo "Procentuální zastoupení pohlaví {$sex}: {$relativeFreqPercent} %";
 
 
 }catch (Exception $e){
